@@ -77,3 +77,25 @@ git commit -m "Update submodule reference"
 
 NOTE: A `post-checkout` git hook has been added. When doing `git switch <branch_name>` in the dev repo, it will mirror a checkout of the same branch name in the `documentation/` submodule.
 
+This is the `post-checkout` script:
+
+```sh
+#!/bin/bash
+
+# Get the current branch of the parent repository
+current_branch=$(git symbolic-ref --short HEAD)
+
+# Navigate to the submodule directory and switch to the same branch
+submodule_path="documentation" # Change this to your submodule's path
+if [ -d "$submodule_path" ]; then
+    cd "$submodule_path"
+    git fetch origin "$current_branch"
+    if git rev-parse --verify "$current_branch" >/dev/null 2>&1; then
+        git switch "$current_branch"
+    else
+        git switch -c "$current_branch" origin/"$current_branch"
+    fi
+    cd ..
+fi
+```
+
