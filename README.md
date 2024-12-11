@@ -75,9 +75,10 @@ git add documentation/
 git commit -m "Update submodule reference"
 ```
 
-NOTE: A `post-checkout` git hook has been added. When doing `git switch <branch_name>` in the dev repo, it will mirror a checkout of the same branch name in the `documentation/` submodule.
+NOTE: A `post-checkout` git hook can be added, such that when doing `git switch <branch_name>` in the dev repo, it will mirror a checkout of the same branch name in the `documentation/` submodule.
+This assumes branch names are identical.
 
-This is the `post-checkout` script:
+Here is the `post-checkout` script:
 
 ```sh
 #!/bin/bash
