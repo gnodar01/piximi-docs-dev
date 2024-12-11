@@ -1,0 +1,20 @@
+[project]
+authors = ["Nodar Gogoberidze <gnodar01@gmail.com>"]
+channels = ["conda-forge"]
+description = "Add a short description here"
+name = "documentation-dev"
+platforms = ["osx-64"]
+version = "0.1.0"
+
+[tasks]
+clean = { cmd = ["rm", "-r", "-f", "$PIXI_PROJECT_ROOT/documentation/piximi-documentation/_build"] }
+build = { cmd = ["jupyter-book", "build", "$PIXI_PROJECT_ROOT/documentation/piximi-documentation"], depends-on = ["clean"] }
+view = { cmd = ["open", "$PIXI_PROJECT_ROOT/documentation/piximi-documentation/_build/html/index.html"] }
+bview = { cmd = ["open", "$PIXI_PROJECT_ROOT/documentation/piximi-documentation/_build/html/index.html"], depends-on = ["build"] }
+
+[dependencies]
+python = "3.12.*"
+ipython = ">=8.30.0,<9"
+ipykernel = ">=6.29.5,<7"
+jupyter = ">=1.1.1,<2"
+jupyter-book = ">=1.0.3,<2"
