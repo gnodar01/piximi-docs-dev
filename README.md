@@ -43,3 +43,35 @@ View the build in browser:
 pixi run view
 ```
 
+## Development
+
+If there are changes in the `main` branch of the submodule, pull the updates:
+
+```sh
+git submodule update --remote documentation/
+```
+
+Check the status of a submodule:
+
+```sh
+git submodule status
+```
+
+Work in the submodule:
+
+```sh
+cd documentation
+
+# normal development
+# e.g.
+git switch dev-branch
+# ...modify files
+git add -A
+git commit -m "change such and such"
+git push
+
+cd ..
+git add documentation/
+git commit -m "Update submodule reference"
+```
+
